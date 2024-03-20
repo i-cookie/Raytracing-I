@@ -55,13 +55,13 @@ So we need a kind of data structure to optimize the intersecting process. We can
 
 One intuitive approach is to use the centroid of the bounding box. Primitives with centroids on the same side of the bounding box centroid are put into the same subset. But there can be problems with this method:
 
-![image-20230413141257614](C:\Users\22848\AppData\Roaming\Typora\typora-user-images\image-20230413141257614.png)
+<img src="pngs/BVH1.png" alt="image-20230413141257614" style="zoom:80%;" />
 
 In this occasion, the bounding box is determined by the red triangle, so if the other blue triangles are all to the left of the centroid, there will be no triangle put into the right subset.
 
 So if we focus on the primitives, we should consider all primitives. We can find the median of the centroid of the primitive bounding boxes, and choose it as the splitting point.
 
-![image-20230413141700084](C:\Users\22848\AppData\Roaming\Typora\typora-user-images\image-20230413141700084.png)
+<img src="pngs/BVH2.png" alt="image-20230413141700084" style="zoom:80%;" />
 
 And finding the median can take $O(primitives.size)$ time complexity using the "quick select" algorithm, which is inspired by quicksort algorithm.
 
@@ -120,7 +120,7 @@ std::vector<Primitive *>::iterator BVHAccel::quickSelect(std::vector<Primitive *
 
 Using BVH, we can avoid judging all the primitives:
 
-![image-20230413143052971](C:\Users\22848\AppData\Roaming\Typora\typora-user-images\image-20230413143052971.png)
+<img src="pngs/BVH3.png" alt="image-20230413143052971" style="zoom:80%;" />
 
 (One BVH node on the head of the cow)
 
